@@ -14,9 +14,15 @@ var firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-var database = firebase.database();
+var db = firebase.firestore();
 
-//Login page
+// -------------------------------------------------------------
+
+/*
+
+The beginning of login.html 
+
+*/
 
 function signIn() {
   var email = document.getElementById("email");
@@ -36,19 +42,20 @@ function signIn() {
   });
 }
 
-function signOut() {
-  auth.signOut();
-  location.href = "../login/login.html";
-}
+/*
 
-// Initialize Firebase
+The end of login.html
 
-//save method to save data into firebase database
+-----------------------------------------------------------------------------------------------------------
+
+
+Beginning of add.html
+
+*/
 
 function save() {
   auth.onAuthStateChanged(function (user) {
     if (user) {
-      var newPostKey = firebase.database().ref().child("bilim").push().key;
       var category = document.getElementById("category").value;
       var categoryName;
       switch (category) {
@@ -81,17 +88,7 @@ function save() {
       }
 
       var color = document.getElementById("color").value;
-      var cost = document.getElementById("cost").value;
-      switch (cost) {
-        case "0":
-          cost = 0;
-          break;
-        case "1":
-          cost = 1;
-          break;
-        default:
-          alert("Something is wrong");
-      }
+      var cost = parseInt(document.getElementById("cost").value);
 
       var date = new Date().toLocaleString().replace(",", "");
       var description = document.getElementById("description").value;
@@ -99,40 +96,61 @@ function save() {
       var name = document.getElementById("name").value;
       var ownerUid = user.uid;
       var myPhoneNumber = document.getElementById("phoneNumber").value;
+      var phoneNumber = [myPhoneNumber];
+      var myOptionalPhoneNumber,
+        phoneElement = document.getElementById("optionalPhoneNumber");
+
+      if (phoneElement != "") {
+        myOptionalPhoneNumber = phoneElement.value;
+        phoneNumber.push(myOptionalPhoneNumber);
+      }
+
       var rating = 5;
       var testCount = 0;
       var videoCount = 0;
       var views = 0;
 
-      database.ref("bilim/" + newPostKey).set({
-        addMatCount: 0,
-        category: category,
-        categoryName: categoryName,
-        color: color,
-        cost: cost,
-        date: date,
-        description: description,
-        icon: icon,
-        id: newPostKey,
-        likes: 0,
-        name: name,
-        ownerUid: ownerUid,
-        phoneNumber: [myPhoneNumber],
-        rating: rating,
-        testCount: testCount,
-        videoCount: videoCount,
-        views: views,
-      });
+      db.collection("bilim")
+        .add({
+          addMatCount: 0,
+          category: category,
+          categoryName: categoryName,
+          color: color,
+          cost: cost,
+          date: date,
+          description: description,
+          icon: icon,
+          likes: 0,
+          name: name,
+          ownerUid: ownerUid,
+          phoneNumber: phoneNumber,
+          rating: rating,
+          testCount: testCount,
+          videoCount: videoCount,
+          views: views,
+        })
+        .then((docRef) => {
+          console.log("Document written with ID: ", docRef.id);
+        })
+        .catch((error) => {
+          console.error("Error adding document: ", error);
+        });
 
       alert("Saved");
       //is signed in
-    } else {
-      //no user signed in
     }
   });
 }
 
-//update selected course
+/*
+
+The end of add.html
+
+-----------------------------------------------------------------------------------------------------------
+
+The beginning of edit.html
+
+*/
 
 function update() {
   auth.onAuthStateChanged(function (user) {
@@ -227,13 +245,17 @@ function update() {
       location.href = "./edit.html";
 
       //is signed in
-    } else {
-      //no user signed in
     }
   });
 }
 
-//function to delete data
+/*
+The end of edit.html
+
+-----------------------------------------------------------------------------------------------------------
+
+The beginnning of delete.html
+*/
 function deleteElement() {
   auth.onAuthStateChanged(function (user) {
     if (user) {
@@ -248,6 +270,14 @@ function deleteElement() {
     }
   });
 }
+
+/* 
+The end of delete.html
+
+-----------------------------------------------------------------------------------------------------------
+
+Buttons
+*/
 
 function goToAdd() {
   auth.onAuthStateChanged(function (user) {
@@ -286,9 +316,6 @@ function goToAddVideo() {
   auth.onAuthStateChanged(function (user) {
     if (user) {
       location.href = "./addVideo.html";
-      //is signed in
-    } else {
-      //no user signed in
     }
   });
 }
@@ -297,9 +324,6 @@ function goToAddTest() {
   auth.onAuthStateChanged(function (user) {
     if (user) {
       location.href = "./addTest.html";
-      //is signed in
-    } else {
-      //no user signed in
     }
   });
 }
@@ -312,14 +336,9 @@ function goToAddQuestions() {
   });
 }
 
-function ObjectLength(object) {
-  var length = 0;
-  for (var key in object) {
-    if (object.hasOwnProperty(key)) {
-      ++length;
-    }
-  }
-  return length;
+function signOut() {
+  auth.signOut();
+  location.href = "../login/login.html";
 }
 
 // edit mn delete degenderge generator
@@ -543,9 +562,18 @@ function addQuestion() {
               varC: varC,
               varD: varD,
             });
-            goToAddQuestions();
+          goToAddQuestions();
         }
       }
     }
   });
+}
+
+/*
+Read data
+*/
+
+function getData(myUserId) {
+  var myData = db.collection("users").get(myUserId);
+  alert(myData);
 }

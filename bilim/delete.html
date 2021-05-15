@@ -2,7 +2,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Добавить Курсы</title>
+    <title>Удалить курсы</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -42,7 +42,7 @@
 
   <body>
     <div class="content">
-      <h1 style="margin-left: 2rem">Здесь вы можете удалить курсы</h1>
+      <h3 style="margin-left: 2rem">Здесь вы можете удалить курсы</h3>
     </div>
 
     <div class="content" id="container"></div>
@@ -59,12 +59,17 @@
       <button
         style="margin: 2rem"
         class="w-40 btn btn-lg btn-warning"
-        onclick="deleteElement()"
+        onclick="confirmation()"
         id="deleteElement"
       >
-        Удалить выбранный курс 
+        Удалить выбранный курс
         <!-- delete.html ge baryshy kerek, anyn ichinde kurstardyn sany jana turu bolushu kerek-->
       </button>
+      <div class="content" style="margin: 2rem"> 
+        <div id="myH1"> </div>
+        <div id="deleteButton" onclick="deleteElement()"></div>
+        <div id="cancelButton" onclick="goToDelete()"></div>
+      </div>
       <div class="content">
         <button
           style="margin: 5rem"

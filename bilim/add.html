@@ -32,21 +32,6 @@
         <div id="header"></div>
         <form action="javascript:save()">
           <div class="form-floating">
-            <select class="form-control" id="category">
-              <option value="11">11 | Secom</option>
-              <option value="22">22 | ЖРТ</option>
-              <option value="23">23 | Алгебра</option>
-              <option value="24">24 | Русский язык</option>
-              <option value="25">25 | Анлис тили</option>
-              <option value="26">26 | Чет өлкөдө окуу</option>
-            </select>
-            <label for="floatingPassword">category</label>
-          </div>
-          <div class="checkbox mb-3"></div>
-
-          <div class="checkbox mb-3"></div>
-
-          <div class="form-floating">
             <input class="form-control" type="color" id="color" />
             <label for="floatingPassword">color</label>
           </div>
@@ -64,35 +49,64 @@
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input class="form-control" type="text" id="description" required />
+            <textarea
+              class="form-control"
+              name="Text1"
+              cols="40"
+              rows="5"
+              id="description"
+              autocomplete="off"
+              required
+            ></textarea>
             <label for="floatingPassword">description</label>
           </div>
 
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input class="form-control" type="url" id="icon" required />
+            <input
+              class="form-control"
+              type="url"
+              id="icon"
+              autocomplete="off"
+              required
+            />
             <label for="floatingPassword">icon</label>
           </div>
 
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input class="form-control" type="text" id="name" required />
+            <input
+              class="form-control"
+              type="text"
+              id="name"
+              autocomplete="off"
+              required
+            />
             <label for="floatingPassword">name</label>
           </div>
 
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input class="form-control" id="phoneNumber" required />
+            <input
+              class="form-control"
+              id="phoneNumber"
+              autocomplete="off"
+              required
+            />
             <label for="floatingPassword">phoneNumber</label>
           </div>
 
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input class="form-control" id="optionalPhoneNumber" />
+            <input
+              class="form-control"
+              id="optionalPhoneNumber"
+              autocomplete="off"
+            />
             <label for="floatingPassword">optionalPhoneNumber</label>
           </div>
 
@@ -114,7 +128,6 @@
         id="signOut"
       >
         Выйти
-        <!-- edit.html ge baryshy kerek, anyn ichinde kurstardyn sany jana turu bolushu kerek-->
       </button>
     </div>
   </body>

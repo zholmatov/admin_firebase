@@ -4,7 +4,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Добавить вопросы</title>
+    <title>Обновить курсы</title>
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
@@ -34,80 +34,70 @@
   </head>
 
   <body class="text-center">
-    <div style="margin: 2rem" class="content">
+    <div style="margin: 5rem" class="content">
       <div class="content">
         <button
-          style="margin: 2rem"
+          style="margin: 5rem"
           class="w-40 btn btn-lg btn-success"
-          onclick="generate()"
+          onclick="generateForUpdate()"
         >
-          Выбрать курс чтобы выбрать тест
+          Выбрать курс чтобы обновить
+          <!-- edit.html ge baryshy kerek, anyn ichinde kurstardyn sany jana turu bolushu kerek-->
         </button>
+
+        <div>
         <div class="content" id="container"></div>
-      </div>
-      <div class="content">
-        <button
-          style="margin: 2rem"
-          class="w-40 btn btn-lg btn-secondary"
-          onclick="generateForTest()"
-        >
-          Выбрать тест чтобы добавить вопрос
-        </button>
-        <div class="content" id="testContainer"></div>
+        <div style="margin:2rem" class="content" id="chooseButton" onclick="fillUpdate()"></div>
+        </div>
       </div>
     </div>
-    <main style="margin: 5rem" class="form-signin">
-      <h1 class="h3 mb-3 fw-normal">Добавить вопрос к выбранному тесту</h1>
+    <main class="form-signin">
+      <h1 class="h3 mb-3 fw-normal">Курс кошуу</h1>
 
       <div id="formContainer" class="form-floating">
         <div id="header"></div>
-        <form action="javascript:addQuestion()">
-          <div class="checkbox mb-3"></div>
-
+        <form action="javascript:update()">
           <div class="form-floating">
-            <input
-              class="form-control"
-              type="number"
-              id="questionNumber"
-              autocomplete="off"
-              required
-            />
-            <label for="floatingPassword">question number</label>
+            <input class="form-control" type="color" id="updateColor" />
+            <label for="floatingPassword">color</label>
           </div>
+
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <select class="form-control" id="answer">
-              <option value="1">varA</option>
-              <option value="2">varB</option>
-              <option value="3">varC</option>
-              <option value="4">varD</option>
+            <select class="form-control" id="updateCost">
+              <option value="1">Бесплатно</option>
+              <option value="0">Платно</option>
             </select>
-            <label for="floatingPassword">answer</label>
+            <label for="floatingPassword">cost</label>
           </div>
+
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
-            <input
+            <textarea
               class="form-control"
-              type="text"
-              id="description"
+              name="Text1"
+              cols="40"
+              rows="5"
+              id="updateDescription"
               autocomplete="off"
               required
-            />
+            ></textarea>
             <label for="floatingPassword">description</label>
           </div>
+
           <div class="checkbox mb-3"></div>
 
           <div class="form-floating">
             <input
               class="form-control"
               type="url"
-              id="photo"
+              id="updateIcon"
               autocomplete="off"
               required
             />
-            <label for="floatingPassword">photo</label>
+            <label for="floatingPassword">icon</label>
           </div>
 
           <div class="checkbox mb-3"></div>
@@ -116,69 +106,39 @@
             <input
               class="form-control"
               type="text"
-              id="question"
+              id="updateName"
               autocomplete="off"
               required
             />
-            <label for="floatingPassword">question</label>
+            <label for="floatingPassword">name</label>
           </div>
 
           <div class="checkbox mb-3"></div>
+
           <div class="form-floating">
             <input
               class="form-control"
-              type="text"
-              id="varA"
+              id="updatePhoneNumber"
               autocomplete="off"
               required
             />
-            <label for="floatingPassword">varA</label>
+            <label for="floatingPassword">phoneNumber</label>
           </div>
 
           <div class="checkbox mb-3"></div>
+
           <div class="form-floating">
             <input
               class="form-control"
-              type="text"
-              id="varB"
+              id="updateOptionalPhoneNumber"
               autocomplete="off"
-              required
             />
-            <label for="floatingPassword">varB</label>
-          </div>
-
-          <div class="checkbox mb-3"></div>
-          <div class="form-floating">
-            <input
-              class="form-control"
-              type="text"
-              id="varC"
-              autocomplete="off"
-              required
-            />
-            <label for="floatingPassword">varC</label>
-          </div>
-
-          <div class="checkbox mb-3"></div>
-          <div class="form-floating">
-            <input
-              class="form-control"
-              type="text"
-              id="varD"
-              autocomplete="off"
-              required
-            />
-            <label for="floatingPassword">varD</label>
-          </div>
-
-          <div class="checkbox mb-3"></div>
-          <div class="form-floating">
-            <input class="form-control" type="text" id="varE" />
-            <label for="floatingPassword">varE(optional)</label>
+            <label for="floatingPassword">optionalPhoneNumber</label>
           </div>
 
           <div class="checkbox mb-3"></div>
 
+          <div class="checkbox mb-3"></div>
           <button class="w-100 btn btn-lg btn-primary" type="submit">
             Добавить
           </button>

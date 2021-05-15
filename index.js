@@ -141,7 +141,6 @@ function update() {
       var color = document.getElementById("updateColor").value;
       var cost = parseInt(document.getElementById("updateCost").value);
 
-      var date = new Date().toLocaleString().replace(",", "");
       var description = document.getElementById("updateDescription").value;
       var icon = document.getElementById("updateIcon").value;
       var name = document.getElementById("updateName").value;
@@ -159,7 +158,7 @@ function update() {
       db.collection("bilim").doc(selectedCourse).set({
         color: color,
         cost: cost,
-        date: date,
+        date: firebase.firestore.FieldValue.serverTimestamp(),
         description: description,
         icon: icon,
         likes: 0,
